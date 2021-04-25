@@ -1,8 +1,7 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
-import { EditTaskModal } from './EditTaskModal'
 
-export const TasksTable = ({ tasks, taskEdited , deleteHandler }) => {
+export const TasksTable = ({ tasks }) => {
   const TableHeader = () => (
     <tr>
       <th>Assigned to</th>
@@ -10,7 +9,6 @@ export const TasksTable = ({ tasks, taskEdited , deleteHandler }) => {
       <th>CreatedBy</th>
       <th>Creation date</th>
       <th>State</th>
-      <th>Actions</th>
     </tr>
   );
 
@@ -25,20 +23,6 @@ export const TasksTable = ({ tasks, taskEdited , deleteHandler }) => {
           <div className="col-md-8">{task.State}</div>
         </div>
       </td>
-      {<td>
-        <div className="col-md-8">
-          <EditTaskModal task={task} taskEdited={taskEdited} />
-        </div>
-        <div className="col-md-6">
-          <button
-            type="button"
-            onClick={(e) => deleteHandler(task.id)}
-            className="btn btn-danger right"
-          >
-            Delete
-          </button>
-        </div>
-      </td> }
     </tr>
   );
 
