@@ -1,7 +1,4 @@
 import { v4 as uuidv4 } from "uuid";
-
-const STORAGE_KEY = 'tasksList.storage';
-
 let mockedTasks = [
   {
     id: uuidv4().toString(),
@@ -36,9 +33,7 @@ let mockedTasks = [
     State: "Completed",
   },
 ];
-export const initStorage = () => {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(mockedTasks));
-}
+
 export const getAllTasks = () => mockedTasks;
 
 export const getTask = (data) =>
