@@ -7,19 +7,16 @@ import "./App.css";
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
-  const [isTaskEdited, setTaskEdited] = useState(false);
-  const [numberOfTasks, setNumberOfTasks] = useState(0);
   const fetchData = useRef(() => {});
 
   fetchData.current = () => {
     const allTasks = getAllTasks();
     setTasks(allTasks);
-    setNumberOfTasks(allTasks.length);
   };
 
   useEffect(() => {
     fetchData.current();
-  }, [fetchData, numberOfTasks , isTaskEdited ]);
+  }, [fetchData]);
 
   return (
     <div className="App">
