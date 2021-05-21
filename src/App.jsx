@@ -1,4 +1,4 @@
-import { initStorage, getAllTasks , deleteTask } from "./services/tasksServices";
+import { initStorage, getAllTasks, deleteTask } from "./services/tasksServices";
 import { Header } from "./components/Header";
 import { TasksTable } from "./components/TasksTable";
 import { CreateTask } from "./components/CreateTask";
@@ -10,7 +10,6 @@ const App = () => {
   const [tasks, setTasks] = useState([]);
   const [isTaskEdited, setTaskEdited] = useState(false);
   const [numberOfTasks, setNumberOfTasks] = useState(0);
-  const STORAGE_KEY = 'tasksList.storage';
   const fetchData = useRef(() => {});
 
   fetchData.current = () => {
@@ -20,15 +19,14 @@ const App = () => {
   };
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify([]));
+    initStorage();
   }, []);
-
 
   useEffect(() => {
     fetchData.current();
-  }, [fetchData, numberOfTasks , isTaskEdited ]);
+  }, [fetchData, numberOfTasks, isTaskEdited]);
 
-  const taskEdited = (data) => setTaskEdited(data.isEdited);
+  const showEditModalHandler = (data) => setTaskEdited(data.isEdited);
 
   const taskCreated = () => setNumberOfTasks(numberOfTasks + 1);
 
@@ -50,7 +48,7 @@ const App = () => {
       <div className="row mrgnbtm">
         <TasksTable
           tasks={tasks}
-          taskEdited={taskEdited}
+          showEditModalHandler={showEditModalHandler}
           deleteHandler={deleteTaskHandler}
         />
       </div>

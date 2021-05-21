@@ -1,64 +1,36 @@
-import { v4 as uuidv4 } from "uuid";
+const STORAGE_KEY = "tasksList.storage";
 
-const STORAGE_KEY = 'tasksList.storage';
+const setItemOnStorage = (data) =>
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 
-let mockedTasks = [
-  {
-    id: uuidv4().toString(),
-    Priority: "Critical",
-    AssignedTo: "Pedro",
-    CreatedBy: "Amin",
-    CreatedDateTime: new Date().toLocaleString(),
-    State: "Completed",
-  },
-  {
-    id: uuidv4().toString(),
-    AssignedTo: "",
-    Priority: "Major",
-    CreatedBy: "Amin",
-    CreatedDateTime: new Date().toLocaleString(),
-    State: "To Do",
-  },
-  {
-    id: uuidv4().toString(),
-    Priority: "Low",
-    AssignedTo: "Jorge",
-    CreatedBy: "Amin",
-    CreatedDateTime: new Date().toLocaleString(),
-    State: "In Progress",
-  },
-  {
-    id: uuidv4().toString(),
-    Priority: "High",
-    AssignedTo: "Amin",
-    CreatedBy: "Amin",
-    CreatedDateTime: new Date().toLocaleString(),
-    State: "Completed",
-  },
-];
-export const initStorage = () => {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(mockedTasks));
-}
-export const getAllTasks = () => mockedTasks;
+export const initStorage = () =>
+  localStorage.setItem(STORAGE_KEY, JSON.stringify([]));
 
-export const getTask = (data) =>
-  mockedTasks.find((task) => task.id === data.id);
+export const getAllTasks = () => JSON.parse(localStorage.getItem(STORAGE_KEY));
 
 export const createTask = (data) => {
   data.CreatedDateTime = new Date().toLocaleString();
-  mockedTasks.push(data);
+  let allTasks = getAllTasks();
+  allTasks.push(data);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(allTasks));
 };
 
 export const updateTask = (data) => {
-  const taskIndex = mockedTasks.findIndex((task) => task.id === data.id);
-  mockedTasks[taskIndex] = data;
+  const allTasks = getAllTasks();
+  const taskIndex = allTasks.findIndex((task) => task.id === data.id);
+  allTasks[taskIndex] = data;
+  setItemOnStorage(allTasks);
   return {
     isEdited: true,
-    editedIncident: mockedTasks[taskIndex],
+    editedIncident: allTasks[taskIndex],
   };
 };
 
 export const deleteTask = (id) => {
-  const taskIndex = mockedTasks.findIndex((task) => task.id === id);
-  mockedTasks.splice(taskIndex, 1);
+  const allTasks = getAllTasks();
+  const taskIndex = allTasks.findIndex((task) => task.id === id);
+  allTasks.splice(taskIndex, 1);
+  setItemOnStorage(allTasks);
 };
+
+export const cleanStorage = () => localStorage.clear();

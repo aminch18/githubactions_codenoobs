@@ -4,7 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import { useForm } from "react-hook-form";
 import { updateTask } from "../services/tasksServices";
 
-export const EditTaskModal = ({ task, taskEdited }) => {
+export const EditTaskModal = ({ task, showEditModalHandler }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -18,9 +18,9 @@ export const EditTaskModal = ({ task, taskEdited }) => {
       CreatedDateTime: CreatedDateTime,
       id: id,
     };
-    
+
     const response = updateTask(updatedTask);
-    taskEdited(response);
+    showEditModalHandler(response);
     setShow(false);
   };
 
