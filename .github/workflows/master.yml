@@ -5,18 +5,23 @@ on:
       - master
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v2.3.1
         with:
-          persist-credentials: false 
+          persist-credentials: false
 
       - name: Install and Build 🔧
         run: |
           npm install
           npm run-script build
-        
+
+      - name: Tests ✅
+        run: |
+          npm run-script test
+
   deploy:
     runs-on: ubuntu-latest
     steps:
