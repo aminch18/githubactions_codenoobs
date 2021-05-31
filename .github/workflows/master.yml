@@ -1,10 +1,17 @@
-name: Master CI/CD workflow
+name: CI/CD
 on:
   push:
     branches:
       - master
+
+env:
+  AZURE_WEBAPP_NAME: ghactions-codenoobs
+  AZURE_WEBAPP_PACKAGE_PATH: "build"
+  NODE_VERSION: "14.x"
+  ARTIFACT_NAME: react-webapp
+
 jobs:
-  build:
+  build:clle
     name: Build
     runs-on: ubuntu-latest
     steps:
@@ -13,21 +20,61 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Install and Build 🔧
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install, Build & Tests 🔧✅
         run: |
           npm install
-          npm run-script build
-
-      - name: Tests ✅
-        run: |
+          npm run-script build 
           npm run-script test
 
-  deploy:
+      - name: Upload Built WebApp ⬆
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: build
+
+  staging:
+    name: Deploy to STG
+    needs: build
+    environment:
+      name: staging
+      url: ${{ steps.deploy_staging.outputs.webapp-url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@3.6.2
+      - name: Download Built WebApp ⬇
+        uses: actions/download-artifact@v1
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: build
+          name:  ${{ env.ARTIFACT_NAME }}
+
+      - name: Deploy to Azure WebApp 🚀
+        uses: azure/webapps-deploy@v2
+        id: deploy_staging
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+          slot-name: staging
+
+   deploy:
+    name: Deploy to PRD
+    needs: staging
+    environment:
+      name: production
+      url: ${{ steps.deploy_production.outputs.webapp-url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Built WebApp ⬇
+        uses: actions/download-artifact@v1
+        with:
+          name:  ${{ env.ARTIFACT_NAME }}
+
+    - name: Deploy to Azure WebApp🚀
+      id: deploy_production
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+
