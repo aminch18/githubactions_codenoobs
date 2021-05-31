@@ -6,7 +6,7 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: ghactions-codenoobs
-  AZURE_WEBAPP_PACKAGE_PATH: build
+  AZURE_WEBAPP_PACKAGE_PATH: ${{ github.workspace }}/build
   NODE_VERSION: 14.x
   ARTIFACT_NAME: react-webapp
 
@@ -41,14 +41,12 @@ jobs:
     name: Deploy to STG
     needs: build
     runs-on: ubuntu-latest
-    #   environment:
-    #     name: staging
-    #     url: https://ghactions-codenoobs-staging.azurewebsites.net
     steps:
       - name: Download Built WebApp ⬇
         uses: actions/download-artifact@v1
         with:
           name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
       - name: Deploy to Azure WebApp 🚀
         uses: azure/webapps-deploy@v2
@@ -62,9 +60,6 @@ jobs:
     name: Deploy to PRD
     needs: staging
     runs-on: ubuntu-latest
-    # environment:
-    #   name: production
-    #   url: https://ghactions-codenoobs.azurewebsites.net
     steps:
       - name: Download Built WebApp ⬇
         uses: actions/download-artifact@v1
