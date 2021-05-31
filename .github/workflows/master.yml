@@ -41,14 +41,14 @@ jobs:
     name: Deploy to STG
     needs: build
     runs-on: ubuntu-latest
-  #   environment:
-  #       name: staging
-  #       url: https://ghactions-codenoobs-staging.azurewebsites.net/
+    #   environment:
+    #       name: staging
+    #       url: https://ghactions-codenoobs-staging.azurewebsites.net/
     steps:
       - name: Download Built WebApp ⬇
         uses: actions/download-artifact@v1
         with:
-          name:  ${{ env.ARTIFACT_NAME }}
+          name: ${{ env.ARTIFACT_NAME }}
 
       - name: Deploy to Azure WebApp 🚀
         uses: azure/webapps-deploy@v2
@@ -69,12 +69,11 @@ jobs:
       - name: Download Built WebApp ⬇
         uses: actions/download-artifact@v1
         with:
-          name:  ${{ env.ARTIFACT_NAME }}
+          name: ${{ env.ARTIFACT_NAME }}
 
-    - name: Deploy to Azure WebApp🚀
-      id: deploy_production
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
-
+      - name: Deploy to Azure WebApp🚀
+        id: deploy_production
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
