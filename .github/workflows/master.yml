@@ -6,8 +6,8 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: ghactions-codenoobs
-  AZURE_WEBAPP_PACKAGE_PATH: "build"
-  NODE_VERSION: "14.x"
+  AZURE_WEBAPP_PACKAGE_PATH: build
+  NODE_VERSION: 14.x
   ARTIFACT_NAME: react-webapp
 
 jobs:
@@ -35,20 +35,20 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: ${{ env.ARTIFACT_NAME }}
-          path: build
+          path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
   staging:
     name: Deploy to STG
     needs: build
-    environment:
-      name: staging
-      url: ${{ steps.deploy_staging.outputs.webapp-url }}
     runs-on: ubuntu-latest
+    #   environment:
+    #     name: staging
+    #     url: https://ghactions-codenoobs-staging.azurewebsites.net
     steps:
       - name: Download Built WebApp ⬇
         uses: actions/download-artifact@v1
         with:
-          name:  ${{ env.ARTIFACT_NAME }}
+          name: ${{ env.ARTIFACT_NAME }}
 
       - name: Deploy to Azure WebApp 🚀
         uses: azure/webapps-deploy@v2
@@ -58,23 +58,22 @@ jobs:
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
           slot-name: staging
 
-   deploy:
+  deploy:
     name: Deploy to PRD
     needs: staging
-    environment:
-      name: production
-      url: ${{ steps.deploy_production.outputs.webapp-url }}
     runs-on: ubuntu-latest
+    # environment:
+    #   name: production
+    #   url: https://ghactions-codenoobs.azurewebsites.net
     steps:
       - name: Download Built WebApp ⬇
         uses: actions/download-artifact@v1
         with:
-          name:  ${{ env.ARTIFACT_NAME }}
+          name: ${{ env.ARTIFACT_NAME }}
 
-    - name: Deploy to Azure WebApp🚀
-      id: deploy_production
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
-
+      - name: Deploy to Azure WebApp🚀
+        id: deploy_production
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
