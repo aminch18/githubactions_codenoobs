@@ -4,7 +4,7 @@ import { createTask } from "../services/tasksServices";
 import { v4 as uuidv4 } from "uuid";
 
 export const CreateTask = ({ taskCreated }) => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = (data, e) => {
     const task = { id: uuidv4(), ...data };
@@ -28,9 +28,11 @@ export const CreateTask = ({ taskCreated }) => {
                   name="AssignedTo"
                   id="AssignedTo"
                   aria-describedby="emailHelp"
-                  ref={register}
+                  ref={register({ required: true })}
                   placeholder="Name of worker"
+                  data-testid="AssignedTo"
                 />
+                {errors.AssignedTo && <p>This field is required ❗</p>}
               </div>
               <div className="form-group col-md-6">
                 <label htmlFor="exampleInputEmail1">Grop of Creation:</label>
@@ -77,7 +79,11 @@ export const CreateTask = ({ taskCreated }) => {
                 </select>
               </div>
             </div>
-            <input type="submit" className="btn btn-danger" />
+            <input
+              type="submit"
+              className="btn btn-danger"
+              data-testid="submit"
+            />
           </form>
         </div>
       </div>

@@ -60,4 +60,5 @@ test("should click one time when deleting task", () => {
   fireEvent.click(button2);
 
   expect(deleteTaskMockedHandler).toHaveBeenCalledTimes(1);
+  expect(setEditMockedHandler).toHaveBeenCalledTimes(0);
 });
