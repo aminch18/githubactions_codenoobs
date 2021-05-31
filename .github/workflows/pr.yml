@@ -1,9 +1,14 @@
-name: Pull requests CI/CD workflow
+name: PR CI
 on:
   pull_request:
     types: [opened]
+
+env:
+  NODE_VERSION: "14.x"
+
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
@@ -11,11 +16,25 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Install and Build 🔧
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install, Build & Tests 🔧✅
         run: |
           npm install
-          npm run-script build
-
-      - name: Tests ✅
-        run: |
+          npm run-script build 
           npm run-script test
+
+  qa:
+    name: Deploy to QA
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Publish on GitHub Pages 🚀
+        uses: JamesIves/github-pages-deploy-action@3.6.2
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: build
