@@ -41,8 +41,8 @@ jobs:
     name: Deploy to STG
     needs: build
     environment:
-      name: staging
-      url: ${{ steps.deploy_staging.outputs.webapp-url }}
+        name: staging
+        url: ${{ steps.deploy_staging.outputs.webapp-url }}
     runs-on: ubuntu-latest
     steps:
       - name: Download Built WebApp ⬇
@@ -62,8 +62,8 @@ jobs:
     name: Deploy to PRD
     needs: staging
     environment:
-      name: production
-      url: ${{ steps.deploy_production.outputs.webapp-url }}
+        name: production
+        url: ${{ steps.deploy_production.outputs.webapp-url }}
     runs-on: ubuntu-latest
     steps:
       - name: Download Built WebApp ⬇
