@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
         name: staging
-        url: ${{ steps.deploy_staging.outputs.webapp-url }}
+        url: https://ghactions-codenoobs-staging.azurewebsites.net/
     steps:
       - name: Download Built WebApp ⬇
         uses: actions/download-artifact@v1
@@ -63,7 +63,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
         name: production
-        url: ${{ steps.deploy_production.outputs.webapp-url }}
+        url: https://ghactions-codenoobs.azurewebsites.net/
     steps:
       - name: Download Built WebApp ⬇
         uses: actions/download-artifact@v1
