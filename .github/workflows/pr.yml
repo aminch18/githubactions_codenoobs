@@ -5,6 +5,7 @@ on:
 
 env:
   NODE_VERSION: "14.x"
+  PACKAGE_PATH: ${{ github.workspace }}/build
 
 jobs:
   build:
@@ -27,11 +28,22 @@ jobs:
           npm run-script build 
           npm run-script test --if-present
 
+      - name: Upload Built WebApp ⬆
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ env.PACKAGE_PATH }}
   qa:
     name: Deploy to QA
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: Download Built WebApp ⬇
+        uses: actions/download-artifact@v1
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ env.PACKAGE_PATH }}
+
       - name: Publish on GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@3.6.2
         with:
