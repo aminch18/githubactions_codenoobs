@@ -1,7 +1,7 @@
 name: PR CI
 on:
   pull_request:
-    types: [opened]
+    types: [opened, edited, synchronize]
 
 env:
   NODE_VERSION: "14.x"
