@@ -1,7 +1,7 @@
 name: PR CI
 on:
   pull_request:
-    types: [opened]
+    types: [opened, edited, synchronize]
 
 env:
   NODE_VERSION: "14.x"
@@ -25,7 +25,7 @@ jobs:
         run: |
           npm install
           npm run-script build 
-          npm run-script test
+          npm run-script test --if-present
 
   qa:
     name: Deploy to QA
