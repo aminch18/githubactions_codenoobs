@@ -5,6 +5,8 @@ on:
 
 env:
   NODE_VERSION: "14.x"
+  PACKAGE_PATH: ./build
+  ARTIFACT_NAME: react-webapp
 
 jobs:
   build:
@@ -27,14 +29,27 @@ jobs:
           npm run-script build 
           npm run-script test --if-present
 
+      - name: Upload Built WebApp ⬆
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ env.PACKAGE_PATH }}
   qa:
     name: Deploy to QA
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Publish on GitHub Pages 🚀
-        uses: JamesIves/github-pages-deploy-action@3.6.2
+      - name: Download Built WebApp ⬇
+        uses: actions/download-artifact@v1
         with:
+          name: ${{ env.ARTIFACT_NAME }}
+
+      - name: Publish on GitHub Pages 🚀
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v2
+        with:
+          target_branch: gh-pages
+          build_dir: ${{ env.ARTIFACT_NAME }}
+          keep_history: false
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: build
