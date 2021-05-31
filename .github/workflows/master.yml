@@ -6,7 +6,7 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: ghactions-codenoobs
-  AZURE_WEBAPP_PACKAGE_PATH: ${{ github.workspace }}/build
+  AZURE_WEBAPP_PACKAGE_PATH: ./build
   NODE_VERSION: 14.x
   ARTIFACT_NAME: react-webapp
 
