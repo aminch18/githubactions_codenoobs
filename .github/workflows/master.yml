@@ -41,9 +41,9 @@ jobs:
     name: Deploy to STG
     needs: build
     runs-on: ubuntu-latest
-    environment:
-      name: staging
-      url: https://ghactions-codenoobs-staging.azurewebsites.net
+    #   environment:
+    #     name: staging
+    #     url: https://ghactions-codenoobs-staging.azurewebsites.net
     steps:
       - name: Download Built WebApp ⬇
         uses: actions/download-artifact@v1
@@ -62,9 +62,9 @@ jobs:
     name: Deploy to PRD
     needs: staging
     runs-on: ubuntu-latest
-    environment:
-      name: production
-      url: https://ghactions-codenoobs.azurewebsites.net
+    # environment:
+    #   name: production
+    #   url: https://ghactions-codenoobs.azurewebsites.net
     steps:
       - name: Download Built WebApp ⬇
         uses: actions/download-artifact@v1
