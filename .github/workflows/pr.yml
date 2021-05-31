@@ -44,9 +44,19 @@ jobs:
         with:
           name: ${{ env.ARTIFACT_NAME }}
 
+      # - name: Publish on GitHub Pages 🚀
+      #   uses: JamesIves/github-pages-deploy-action@3.6.2
+      #   with:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     BRANCH: gh-pages
+      #     FOLDER: ${{ env.ARTIFACT_NAME }}
+
       - name: Publish on GitHub Pages 🚀
-        uses: JamesIves/github-pages-deploy-action@3.6.2
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v2
         with:
+          target_branch: gh-pages
+          build_dir: ${{ env.ARTIFACT_NAME }}
+          keep_history: false
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: ${{ env.ARTIFACT_NAME }}
