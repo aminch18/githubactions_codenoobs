@@ -11,7 +11,7 @@ env:
   ARTIFACT_NAME: react-webapp
 
 jobs:
-  build:clle
+  build:
     name: Build
     runs-on: ubuntu-latest
     steps:
