@@ -1,6 +1,5 @@
 import { render } from "@testing-library/react";
 import { CreateTask } from "../components/CreateTask";
-import { fireEvent, prettyDOM } from "@testing-library/dom";
 import React from "react";
 import "@testing-library/jest-dom/extend-expect";
 
