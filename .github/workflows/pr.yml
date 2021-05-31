@@ -6,6 +6,7 @@ on:
 env:
   NODE_VERSION: "14.x"
   PACKAGE_PATH: ./build
+  ARTIFACT_NAME: react-webapp
 
 jobs:
   build:
