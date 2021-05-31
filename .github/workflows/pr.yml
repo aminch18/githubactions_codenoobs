@@ -43,7 +43,6 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: ${{ env.ARTIFACT_NAME }}
-          path: ${{ env.PACKAGE_PATH }}
 
       - name: Publish on GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@3.6.2
