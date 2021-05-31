@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
         name: staging
-        url: https://ghactions-codenoobs-staging.azurewebsites.net/
+        url: https://ghactions-codenoobs-staging.azurewebsites.net
     steps:
       - name: Download Built WebApp ⬇
         uses: actions/download-artifact@v1
@@ -64,7 +64,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
         name: production
-        url: https://ghactions-codenoobs.azurewebsites.net/
+        url: https://ghactions-codenoobs.azurewebsites.net
     steps:
       - name: Download Built WebApp ⬇
         uses: actions/download-artifact@v1
