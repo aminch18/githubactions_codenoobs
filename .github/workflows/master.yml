@@ -41,6 +41,7 @@ jobs:
     needs: build
     environment:
       name: staging
+      url: ${{ steps.deploy_staging.outputs.webapp-url }}
     name: Deploy to STG
     runs-on: ubuntu-latest
     steps:
@@ -62,7 +63,8 @@ jobs:
   deploy:
     needs: staging
     environment:
-      name: staging
+      name: production
+      url: ${{ steps.deploy_production.outputs.webapp-url }}
     name: Deploy to PRD
     runs-on: ubuntu-latest
     steps:
