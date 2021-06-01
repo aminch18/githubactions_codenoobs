@@ -50,7 +50,6 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: ${{ env.ARTIFACT_NAME }}
-          path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
       - name: Deploy to Azure WebApp 🚀
         uses: azure/webapps-deploy@v2
@@ -73,7 +72,6 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: ${{ env.ARTIFACT_NAME }}
-          path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
       - name: Deploy to Azure WebApp🚀
         id: deploy_production
