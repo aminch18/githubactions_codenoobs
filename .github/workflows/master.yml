@@ -9,7 +9,7 @@ env:
   AZURE_WEBAPP_PACKAGE_PATH: ./build
   NODE_VERSION: 14.x
   ARTIFACT_NAME: react-webapp
-  STG_SLOT_NAME: ghactions-codenoobs-staging - Web Deploy
+  STG_SLOT_NAME: staging
 
 jobs:
   build:
