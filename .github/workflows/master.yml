@@ -54,6 +54,7 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
           slot-name: staging
 
   deploy:
@@ -72,3 +73,4 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
