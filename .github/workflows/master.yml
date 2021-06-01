@@ -9,6 +9,7 @@ env:
   AZURE_WEBAPP_PACKAGE_PATH: ./build
   NODE_VERSION: 14.x
   ARTIFACT_NAME: react-webapp
+  STG_SLOT_NAME: ghactions-codenoobs-staging
 
 jobs:
   build:
@@ -58,7 +59,7 @@ jobs:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-          slot-name: staging
+          slot-name: ${{ env.STG_SLOT_NAME }}
 
   deploy:
     needs: staging
@@ -72,6 +73,7 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
       - name: Deploy to Azure WebApp🚀
         id: deploy_production
