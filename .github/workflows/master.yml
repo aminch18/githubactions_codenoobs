@@ -5,7 +5,7 @@ on:
       - master
 
 env:
-  AZURE_WEBAPP_NAME: ghactions-codenoobs
+  AZURE_WEBAPP_NAME: "ghactions-codenoobs"
   AZURE_WEBAPP_PACKAGE_PATH: ./build
   NODE_VERSION: 14.x
   ARTIFACT_NAME: react-webapp
@@ -38,8 +38,10 @@ jobs:
           path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
   staging:
-    name: Deploy to STG
     needs: build
+    environment:
+      name: staging
+    name: Deploy to STG
     runs-on: ubuntu-latest
     steps:
       - name: Download Built WebApp ⬇
@@ -58,8 +60,10 @@ jobs:
           slot-name: staging
 
   deploy:
-    name: Deploy to PRD
     needs: staging
+    environment:
+      name: staging
+    name: Deploy to PRD
     runs-on: ubuntu-latest
     steps:
       - name: Download Built WebApp ⬇
