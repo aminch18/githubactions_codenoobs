@@ -6,7 +6,8 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: "ghactions-codenoobs"
-  AZURE_WEBAPP_PACKAGE_PATH: ./build
+  PACKAGE_PATH: ./build
+  AZURE_WEBAPP_PACKAGE_PATH: ${{ github.workspace }}/build
   NODE_VERSION: 14.x
   ARTIFACT_NAME: react-webapp
   STG_SLOT_NAME: staging
@@ -36,7 +37,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: ${{ env.ARTIFACT_NAME }}
-          path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+          path: ${{ env.PACKAGE_PATH }}
 
   staging:
     needs: build
@@ -50,7 +51,6 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: ${{ env.ARTIFACT_NAME }}
-          path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
       - name: Deploy to Azure WebApp 🚀
         uses: azure/webapps-deploy@v2
@@ -73,7 +73,6 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: ${{ env.ARTIFACT_NAME }}
-          path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
       - name: Deploy to Azure WebApp🚀
         id: deploy_production
