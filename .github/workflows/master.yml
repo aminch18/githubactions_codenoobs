@@ -45,7 +45,7 @@ jobs:
     environment:
       name: dev
       url: ${{ steps.deploy_dev.outputs.webapp-url }}
-    name: Deploy to STG
+    name: Deploy to DEV
     runs-on: ubuntu-latest
     steps:
       - name: Download Built WebApp ⬇
