@@ -5,10 +5,12 @@ on:
       - master
 
 env:
-  AZURE_WEBAPP_NAME: ghactions-codenoobs
-  AZURE_WEBAPP_PACKAGE_PATH: ./build
+  AZURE_WEBAPP_NAME: "ghactions-codenoobs"
+  PACKAGE_PATH: ./build
+  AZURE_WEBAPP_PACKAGE_PATH: ${{ github.workspace }}/react-webapp
   NODE_VERSION: 14.x
   ARTIFACT_NAME: react-webapp
+  STG_SLOT_NAME: staging
 
 jobs:
   build:
@@ -35,18 +37,42 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: ${{ env.ARTIFACT_NAME }}
-          path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+          path: ${{ env.PACKAGE_PATH }}
 
-  staging:
-    name: Deploy to STG
+  dev:
     needs: build
+    environment:
+      name: dev
+      url: ${{ steps.deploy_dev.outputs.webapp-url }}
+    name: Deploy to STG
     runs-on: ubuntu-latest
     steps:
       - name: Download Built WebApp ⬇
         uses: actions/download-artifact@v1
         with:
           name: ${{ env.ARTIFACT_NAME }}
-          path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
+      - name: Deploy to Azure WebApp 🚀
+        uses: azure/webapps-deploy@v2
+        id: deploy_dev
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+          slot-name: ${{ env.STG_SLOT_NAME }}
+
+  staging:
+    needs: dev
+    environment:
+      name: staging
+      url: ${{ steps.deploy_staging.outputs.webapp-url }}
+    name: Deploy to STG
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Built WebApp ⬇
+        uses: actions/download-artifact@v1
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
 
       - name: Deploy to Azure WebApp 🚀
         uses: azure/webapps-deploy@v2
@@ -54,11 +80,15 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
-          slot-name: staging
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+          slot-name: ${{ env.STG_SLOT_NAME }}
 
   deploy:
-    name: Deploy to PRD
     needs: staging
+    environment:
+      name: production
+      url: ${{ steps.deploy_production.outputs.webapp-url }}
+    name: Deploy to PRD
     runs-on: ubuntu-latest
     steps:
       - name: Download Built WebApp ⬇
@@ -72,3 +102,4 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
