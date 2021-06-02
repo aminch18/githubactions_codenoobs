@@ -1,4 +1,4 @@
-import { getAllTasks , deleteTask } from "./services/tasksServices";
+import { getAllTasks, deleteTask } from "./services/tasksServices";
 import { Header } from "./components/Header";
 import { TasksTable } from "./components/TasksTable";
 import { CreateTask } from "./components/CreateTask";
@@ -20,7 +20,8 @@ const App = () => {
 
   useEffect(() => {
     fetchData.current();
-  }, [fetchData, numberOfTasks , isTaskEdited ]);
+    setTaskEdited(false);
+  }, [fetchData, numberOfTasks, isTaskEdited]);
 
   const taskEdited = (data) => setTaskEdited(data.isEdited);
 
