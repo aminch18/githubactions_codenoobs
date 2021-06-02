@@ -10,6 +10,7 @@ env:
   AZURE_WEBAPP_PACKAGE_PATH: ${{ github.workspace }}/react-webapp
   NODE_VERSION: 14.x
   ARTIFACT_NAME: react-webapp
+  DEV_SLOT_NAME: dev
   STG_SLOT_NAME: staging
 
 jobs:
@@ -59,7 +60,7 @@ jobs:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-          slot-name: ${{ env.STG_SLOT_NAME }}
+          slot-name: ${{ env.DEV_SLOT_NAME }}
 
   staging:
     needs: dev
