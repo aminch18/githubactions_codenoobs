@@ -10,10 +10,7 @@ env:
   AZURE_WEBAPP_PACKAGE_PATH: ${{ github.workspace }}/react-webapp
   NODE_VERSION: 14.x
   ARTIFACT_NAME: react-webapp
-<<<<<<< HEAD
-=======
   DEV_SLOT_NAME: dev
->>>>>>> master
   STG_SLOT_NAME: staging
 
 jobs:
