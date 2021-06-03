@@ -18,7 +18,7 @@ export const EditTaskModal = ({ task, taskEdited }) => {
       CreatedDateTime: CreatedDateTime,
       id: id,
     };
-    
+
     const response = updateTask(updatedTask);
     taskEdited(response);
     setShow(false);
@@ -47,6 +47,7 @@ export const EditTaskModal = ({ task, taskEdited }) => {
                   aria-describedby="emailHelp"
                   ref={register}
                   placeholder="Name of worker"
+                  data-testid="AssignedTo"
                 />
               </div>
               <div className="form-group col-md-6">
