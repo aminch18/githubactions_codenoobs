@@ -28,9 +28,3 @@ jobs:
           npm install
           npm run-script build 
           npm run-script test --if-present
-
-      - name: Upload Built WebApp ⬆
-        uses: actions/upload-artifact@v1
-        with:
-          name: ${{ env.ARTIFACT_NAME }}
-          path: ${{ env.PACKAGE_PATH }}
