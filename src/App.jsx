@@ -1,4 +1,4 @@
-import { getAllTasks , deleteTask } from "./services/tasksServices";
+import { getAllTasks, deleteTask } from "./services/tasksServices";
 import { Header } from "./components/Header";
 import { TasksTable } from "./components/TasksTable";
 import { CreateTask } from "./components/CreateTask";
@@ -8,7 +8,6 @@ import "./App.css";
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
-  const [isTaskEdited, setTaskEdited] = useState(false);
   const [numberOfTasks, setNumberOfTasks] = useState(0);
   const fetchData = useRef(() => {});
 
@@ -20,9 +19,7 @@ const App = () => {
 
   useEffect(() => {
     fetchData.current();
-  }, [fetchData, numberOfTasks , isTaskEdited ]);
-
-  const taskEdited = (data) => setTaskEdited(data.isEdited);
+  }, [fetchData, numberOfTasks, isTaskEdited]);
 
   const taskCreated = () => setNumberOfTasks(numberOfTasks + 1);
 
@@ -42,11 +39,7 @@ const App = () => {
         </div>
       </div>
       <div className="row mrgnbtm">
-        <TasksTable
-          tasks={tasks}
-          taskEdited={taskEdited}
-          deleteHandler={deleteTaskHandler}
-        />
+        <TasksTable tasks={tasks} deleteHandler={deleteTaskHandler} />
       </div>
     </div>
   );
