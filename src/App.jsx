@@ -1,5 +1,6 @@
 import { initStorage, getAllTasks, deleteTask } from "./services/tasksServices";
 import { Header } from "./components/Header";
+import { CreateTask } from "./components/CreateTask";
 import { TasksTable } from "./components/TasksTable";
 import React, { useState, useEffect, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -22,6 +23,7 @@ const App = () => {
 
   useEffect(() => {
     fetchData.current();
+    setTaskEdited(false);
   }, [fetchData, numberOfTasks, isTaskEdited]);
 
   const showEditModalHandler = (data) => setTaskEdited(data.isEdited);
@@ -36,6 +38,13 @@ const App = () => {
   return (
     <div className="App">
       <Header />
+      <div className="container mrgnbtm">
+        <div className="row">
+          <div className="col-md-12">
+            <CreateTask taskCreated={taskCreated} />
+          </div>
+        </div>
+      </div>
       <div className="row mrgnbtm">
         <TasksTable
           tasks={tasks}
