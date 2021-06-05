@@ -19,7 +19,7 @@ const App = () => {
 
   useEffect(() => {
     fetchData.current();
-  }, [fetchData, numberOfTasks, isTaskEdited]);
+  }, [fetchData, numberOfTasks]);
 
   const taskCreated = () => setNumberOfTasks(numberOfTasks + 1);
 
