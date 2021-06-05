@@ -12,7 +12,6 @@ export const CreateTask = ({ taskCreated }) => {
     taskCreated();
     e.target.reset();
   };
-
   return (
     <div className="container">
       <div className="row">
