@@ -46,3 +46,22 @@ export const getAllTasks = () => mockedTasks;
 
 export const getTask = (data) =>
   mockedTasks.find((task) => task.id === data.id);
+
+export const createTask = (data) => {
+  data.CreatedDateTime = new Date().toLocaleString();
+  mockedTasks.push(data);
+};
+
+export const updateTask = (data) => {
+  const taskIndex = mockedTasks.findIndex((task) => task.id === data.id);
+  mockedTasks[taskIndex] = data;
+  return {
+    isEdited: true,
+    editedIncident: mockedTasks[taskIndex],
+  };
+};
+
+export const deleteTask = (id) => {
+  const taskIndex = mockedTasks.findIndex((task) => task.id === id);
+  mockedTasks.splice(taskIndex, 1);
+};

@@ -1,5 +1,4 @@
 import { render } from "@testing-library/react";
-import { fireEvent, prettyDOM } from "@testing-library/dom";
 import { TasksTable } from "../components/TasksTable";
 import React from "react";
 import { deleteTask } from "../services/tasksServices";
