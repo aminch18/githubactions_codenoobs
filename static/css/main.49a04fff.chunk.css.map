@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/App.css"],"names":[],"mappings":"AAAA,QACE,UAAW,CACX,UAAW,CACX,UAAY,CACZ,iBACF,CAEA,SACE,eACF,CAEA,WACE,iBACF","file":"main.49a04fff.chunk.css","sourcesContent":[".header {\n  width: 100%;\n  padding: 2%;\n  color: black;\n  text-align: center;\n}\n\n.mrgnbtm {\n  margin-top: 20px;\n}\n\n.btncenter {\n  text-align: center;\n}\n"]}
