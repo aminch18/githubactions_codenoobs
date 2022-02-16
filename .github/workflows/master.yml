@@ -40,5 +40,6 @@ jobs:
         with:
           target_branch: master
           build_dir: ${{ env.PACKAGE_PATH }}
+          dry_run: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
