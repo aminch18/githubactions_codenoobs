@@ -14,8 +14,8 @@ env:
   STG_SLOT_NAME: staging
 
 jobs:
-  build:
-    name: Build
+  build-and-deploy:
+    name: Build&Deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
@@ -34,73 +34,11 @@ jobs:
           npm run-script build 
           npm run-script test
 
-      - name: Upload Built WebApp ⬆
-        uses: actions/upload-artifact@v1
+      - name: Deploy to GitHub Pages
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v2
         with:
-          name: ${{ env.ARTIFACT_NAME }}
-          path: ${{ env.PACKAGE_PATH }}
-
-  dev:
-    needs: build
-    environment:
-      name: dev
-      url: ${{ steps.deploy_dev.outputs.webapp-url }}
-    name: Deploy to DEV
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download Built WebApp ⬇
-        uses: actions/download-artifact@v1
-        with:
-          name: ${{ env.ARTIFACT_NAME }}
-
-      - name: Deploy to Azure WebApp 🚀
-        uses: azure/webapps-deploy@v2
-        id: deploy_dev
-        with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
-          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-          slot-name: ${{ env.DEV_SLOT_NAME }}
-
-  staging:
-    needs: dev
-    environment:
-      name: staging
-      url: ${{ steps.deploy_staging.outputs.webapp-url }}
-    name: Deploy to STG
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download Built WebApp ⬇
-        uses: actions/download-artifact@v1
-        with:
-          name: ${{ env.ARTIFACT_NAME }}
-
-      - name: Deploy to Azure WebApp 🚀
-        uses: azure/webapps-deploy@v2
-        id: deploy_staging
-        with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
-          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-          slot-name: ${{ env.STG_SLOT_NAME }}
-
-  deploy:
-    needs: staging
-    environment:
-      name: production
-      url: ${{ steps.deploy_production.outputs.webapp-url }}
-    name: Deploy to PRD
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download Built WebApp ⬇
-        uses: actions/download-artifact@v1
-        with:
-          name: ${{ env.ARTIFACT_NAME }}
-
-      - name: Deploy to Azure WebApp🚀
-        id: deploy_production
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
-          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+          target_branch: master
+          build_dir: ${{ env.PACKAGE_PATH }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
