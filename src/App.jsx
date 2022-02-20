@@ -1,5 +1,6 @@
 import { getAllTasks, deleteTask } from "./services/tasksServices";
 import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 import { TasksTable } from "./components/TasksTable";
 import { CreateTask } from "./components/CreateTask";
 import React, { useState, useEffect, useRef } from "react";
@@ -31,16 +32,17 @@ const App = () => {
   return (
     <div className="App">
       <Header />
-      <div className="container mrgnbtm">
+      <div className="container mt-4">
         <div className="row">
           <div className="col-md-12">
             <CreateTask taskCreated={taskCreated} />
           </div>
         </div>
       </div>
-      <div className="row mrgnbtm">
+      <div className="container mt-4">
         <TasksTable tasks={tasks} deleteHandler={deleteTaskHandler} />
       </div>
+      <Footer />
     </div>
   );
 };

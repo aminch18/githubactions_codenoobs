@@ -1,0 +1,22 @@
+.footer {
+    box-shadow: rgb(0 0 0 / 50%) 0px -5px 6px -4px;
+    min-height: 80px;
+    padding: 16px;
+}
+
+.footer a {
+    margin: 3px 0;
+    display: flex;
+    align-items: flex-start;
+    color: #212529;
+    border-bottom: 1px solid transparent;
+    transition: all .25s;
+    opacity: 0.75;
+}
+
+.footer a:hover {
+    text-decoration: none;
+    border-bottom-color:  #212529;
+    opacity: 1;
+    color: #000000;
+}
