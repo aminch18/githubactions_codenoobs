@@ -5,13 +5,9 @@ on:
       - master
 
 env:
-  AZURE_WEBAPP_NAME: "ghactions-codenoobs"
   PACKAGE_PATH: ./build
-  AZURE_WEBAPP_PACKAGE_PATH: ${{ github.workspace }}/react-webapp
   NODE_VERSION: 14.x
   ARTIFACT_NAME: react-webapp
-  DEV_SLOT_NAME: dev
-  STG_SLOT_NAME: staging
 
 jobs:
   build-and-deploy:
