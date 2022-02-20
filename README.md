@@ -68,7 +68,7 @@ With this challenge we'll learn how to run our workflow on specific times.
 - The step must edit the existing issue adding "TechWeek" as Label.
 
 ##### Clue: The commands to edit issues on GitHub is easy to find using Google :)!
-##
+
 ### 4. Dependency between Jobs
 - You must edit the master.yml file.
 - This workflow must be splitted on 2 jobs.
