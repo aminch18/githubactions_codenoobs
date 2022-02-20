@@ -10,8 +10,8 @@ env:
   ARTIFACT_NAME: react-webapp
 
 jobs:
-  build-and-deploy:
-    name: Build&Deploy
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
@@ -29,13 +29,3 @@ jobs:
           npm install
           npm run-script build 
           npm run-script test
-
-      - name: Deploy to GitHub Pages
-        if: success()
-        uses: crazy-max/ghaction-github-pages@v2
-        with:
-          target_branch: master
-          build_dir: ${{ env.PACKAGE_PATH }}
-          dry_run: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
