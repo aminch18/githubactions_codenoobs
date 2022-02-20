@@ -29,8 +29,7 @@ npm run test
 
 # Challenges
 ##### This section shows the challenges you should do, in order to understand the different topics explained in the presentation. You will realise some challenges needs to research information about GitHub workflow statements that were not showed on the presentation.
-##
-##
+
 #####  Therefore, you must use this documentation in order to find what you need to achieve the challenge:
 #### https://docs.github.com/es/actions/quickstart
 ## 1. Manual trigger
@@ -46,8 +45,7 @@ After fork the repository and cloned locally you must do the following things:
     -  Step 4: List files in the repository
 
 ##### Clue: One of the steps must use one GitHub Action.
-##
-##
+
 ## 2. Scheduled workflow
 With this challenge we'll learn how to run our workflow on specific times.
 - Create new workflow file inside workflows folder.
@@ -61,8 +59,7 @@ With this challenge we'll learn how to run our workflow on specific times.
         -  Your name as Body.
 
 ##### Clue: The commands to create issues on GitHub is easy to find using Google :)!
-##
-##
+
 ### 3. Triggered workflow
 - Create new workflow file inside workflows folder.
 - This workflow must be  triggered when an issue is created (opened) on GitHub.
