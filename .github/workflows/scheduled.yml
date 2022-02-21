@@ -1,7 +1,7 @@
 name: Scheduled Trigger
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "*/1 * * * *"
 
 jobs:
   create_issue:
@@ -11,4 +11,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           now=$(date +'%m/%d/%Y')
-          gh issue create -t "${now}"
+          gh issue create -t "${now}" -b "Amin Chouaibi"

@@ -42,7 +42,7 @@ After fork the repository and cloned locally you must do the following things:
     -  Step 1: Write the name of the event with any fancy sentence.
     -  Step 2: Write the name of the repository with any fancy sentence.
     -  Step 3: Load your repository on your agent runner.
-    -  Step 4: List files in the repository
+    -  Step 4: List files in the repository recursively.
 
 ##### Clue: One of the steps must use one GitHub Action.
 
