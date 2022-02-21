@@ -10,5 +10,4 @@ jobs:
       - env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          now=$(date +'%m/%d/%Y')
-          gh issue create -t "${now}" -b "Amin Chouaibi"
+          gh issue create -t "$(date +'%Y-%m-%d')" -b "Amin Chouaibi"
