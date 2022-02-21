@@ -57,9 +57,9 @@ With this challenge we'll learn how to run our workflow on specific times.
     -  Step 1: Get current date and create an output of the step with the date.
     -  Step 2: Checkout repository.
     -  Step 3: The step must create an issue on GiHhub using git hub commands (similar to git   commands).
-    -  The issue created must has got:
-            -  Current date as Title.
-            -  Your name as Body, feel free to write what you want.
+-  The issue created must has got:
+    -  Current date as Title.
+    -  Your name as Body, feel free to write what you want.
 
 ##### Clues: Find how to extract current datetime on bash. Find how to define an output for one step. The commands to create issues on GitHub is easy to find using Google.
 
