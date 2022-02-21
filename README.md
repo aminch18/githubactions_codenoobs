@@ -57,7 +57,7 @@ With this challenge we'll learn how to run our workflow on specific times.
     -  Step 1: Get current date and create an output of the step with the date.
     -  Step 2: Checkout repository.
     -  Step 3: The step must create an issue on GiHhub using git hub commands (similar to git   commands).
-        -  The issue created must has got:
+    -  The issue created must has got:
             -  Current date as Title.
             -  Your name as Body, feel free to write what you want.
 
@@ -68,7 +68,7 @@ With this challenge we'll learn how to run our workflow on specific times.
 - This workflow must be  triggered when an issue is created (opened) on GitHub.
 - The workflow must has got a single job with 2 step.
 - All the steps must run on ubuntu-latest version.
-- The step must edit the existing issue adding "TechWeek" as Label.
+- The step must edit the existing issue adding "good first issue" as Label, if you go to issues section on your repository you can check different labels.
 
 ##### Clue: The commands to edit issues on GitHub is easy to find using Google :)!
 
