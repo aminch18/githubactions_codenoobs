@@ -1,0 +1,21 @@
+name: Manual trigger
+on:
+  workflow_dispatch:
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show event name.
+        run: |
+          echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+
+      - name: Show repository name.
+        run: |
+          echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+
+      - name: Check out repository code 🛎️
+        uses: actions/checkout@v2
+
+      - name: List files in the repository 📃
+        run: |
+          ls ${{ github.workspace }}

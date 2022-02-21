@@ -1,0 +1,14 @@
+name: Scheduled Trigger
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+
+jobs:
+  create_issue:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          now=$(date +'%m/%d/%Y')
+          gh issue create -t "${now}"
