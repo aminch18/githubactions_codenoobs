@@ -45,12 +45,10 @@ jobs:
         with:
           name: ${{ env.ARTIFACT_NAME }}
 
-      - name: Checkout 🛎️
-        uses: actions/checkout@v2.3.1
+      - name: Deploy
+        uses: crazy-max/ghaction-github-pages@v1
         with:
-          ref: gh-pages
-
-      - name: Commiting changes 📃
-        run: |
-          git add  ${{ env.ARTIFACT_PATH }}/static
-          git commit -m "New feature is released"
+          target_branch: gh-pages
+          build_dir:  ${{ env.ARTIFACT_PATH }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
