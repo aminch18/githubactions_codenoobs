@@ -5,6 +5,7 @@ on:
 
 jobs:
   edit_issue:
+    name: Edit existing Issue
     runs-on: ubuntu-latest
     permissions:
       issues: write

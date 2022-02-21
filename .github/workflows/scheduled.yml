@@ -6,6 +6,7 @@ on:
 
 jobs:
   create_issue:
+    name: Create new Issue
     runs-on: ubuntu-latest
     steps:
       - name: Get current date

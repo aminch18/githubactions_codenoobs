@@ -2,7 +2,8 @@ name: Manual Worfklow
 on:
   workflow_dispatch:
 jobs:
-  Explore-GitHub-Actions:
+  single:
+    name: Explore Github Actions
     runs-on: ubuntu-latest
     steps:
       - name: Show event name.
