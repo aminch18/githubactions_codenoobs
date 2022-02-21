@@ -35,9 +35,9 @@ jobs:
         with:
           name: ${{ env.ARTIFACT_NAME }}
           path: ${{ env.PACKAGE_PATH }}
-  commit:
+  deploy:
     needs: build
-    name: Commit on GH-Pages branch
+    name: Deploy on Gh-pages
     runs-on: ubuntu-latest
     steps:
       - name: Download Built WebApp ⬇
