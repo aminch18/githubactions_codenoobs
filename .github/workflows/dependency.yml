@@ -36,18 +36,17 @@ jobs:
         with:
           name: ${{ env.ARTIFACT_NAME }}
           path: ${{ env.PACKAGE_PATH }}
-    
-    show:
-      needs: build
-      name: Show files in artifact
-      runs-on: ubuntu-latest
-      steps:
-        - name: Download Built WebApp ⬇
-          uses: actions/download-artifact@v1
-          with:
-            name: ${{ env.ARTIFACT_NAME }}
+  show:
+    needs: build
+    name: Show files in artifact
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Built WebApp ⬇
+        uses: actions/download-artifact@v1
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
 
-        - name: List files in the artifact 📃
-          run: |
-            ls -R ${{ env.ARTIFACT_PATH }}
+      - name: List files in the artifact 📃
+        run: |
+          ls -R ${{ env.ARTIFACT_PATH }}
 
