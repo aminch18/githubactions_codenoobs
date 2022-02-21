@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/githubactions_codenoobs/static/css/main.5cca1590.css",
+    "main.js": "/githubactions_codenoobs/static/js/main.82b8739c.js",
+    "index.html": "/githubactions_codenoobs/index.html",
+    "main.5cca1590.css.map": "/githubactions_codenoobs/static/css/main.5cca1590.css.map",
+    "main.82b8739c.js.map": "/githubactions_codenoobs/static/js/main.82b8739c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5cca1590.css",
+    "static/js/main.82b8739c.js"
+  ]
+}
