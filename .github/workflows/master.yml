@@ -27,8 +27,8 @@ jobs:
       - name: Install, Build & Tests 🔧✅
         run: |
           npm install
-          npm run-script build 
-          npm run-script test
+          npm run build 
+          npm run test
 
       - name: Upload Built WebApp ⬆
         uses: actions/upload-artifact@v1
