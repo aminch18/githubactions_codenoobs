@@ -29,3 +29,28 @@ jobs:
           npm install
           npm run-script build 
           npm run-script test
+
+      - name: Upload Built WebApp ⬆
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ env.PACKAGE_PATH }}
+  commit:
+    needs: build
+    name: Commit on GH-Pages branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Built WebApp ⬇
+        uses: actions/download-artifact@v1
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.1
+        with:
+          ref: gh-pages
+
+      - name: Commiting changes 📃
+        run: |
+          git add ${{ env.ARTIFACT_PATH }}
+          git commit -m "New feature is released"
