@@ -52,5 +52,5 @@ jobs:
 
       - name: Commiting changes 📃
         run: |
-          git add . ${{ env.ARTIFACT_PATH }}
+          git add  ${{ env.ARTIFACT_PATH }}/static
           git commit -m "New feature is released"
