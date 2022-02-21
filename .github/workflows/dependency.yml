@@ -1,4 +1,4 @@
-name: Master CI/CD
+name: Dependencies Workflow
 on:
   push:
     branches:
