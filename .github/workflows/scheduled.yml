@@ -1,4 +1,4 @@
-name: Scheduled Trigger
+name: Scheduled Worfklow
 on:
   workflow_dispatch:
   schedule:

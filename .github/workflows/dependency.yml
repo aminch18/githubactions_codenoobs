@@ -1,0 +1,53 @@
+name: Master CI/CD
+on:
+  push:
+    branches:
+      - master
+
+env:
+  PACKAGE_PATH: ./build
+  NODE_VERSION: 14.x
+  ARTIFACT_NAME: webapp
+  ARTIFACT_PATH: ${{ github.workspace }}/webapp
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.1
+        with:
+          persist-credentials: false
+
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install, Build & Tests 🔧✅
+        run: |
+          npm install
+          npm run-script build 
+          npm run-script test
+          
+      - name: Upload Built WebApp ⬆
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ env.PACKAGE_PATH }}
+    
+    show:
+      needs: build
+      name: Show files in artifact
+      runs-on: ubuntu-latest
+      steps:
+        - name: Download Built WebApp ⬇
+          uses: actions/download-artifact@v1
+          with:
+            name: ${{ env.ARTIFACT_NAME }}
+
+        - name: List files in the artifact 📃
+          run: |
+            ls -R ${{ env.ARTIFACT_PATH }}
+

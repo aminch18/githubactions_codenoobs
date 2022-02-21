@@ -1,0 +1,18 @@
+name: Triggered workflow
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  edit_issue:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Check out repository code 🛎️
+        uses: actions/checkout@v2
+        
+      - env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue edit  ${{ github.event.issue.id }} --add-label "TechWeek"

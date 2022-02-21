@@ -49,21 +49,24 @@ After fork the repository and cloned locally you must do the following things:
 ## 2. Scheduled workflow
 With this challenge we'll learn how to run our workflow on specific times.
 - Create new workflow file inside workflows folder.
-- This workflow must be scheduled.
-- The workflow must has got a single job with 1 step.
+- This workflow must be scheduled and with the possibility to be executed manually.
+- The workflow must has got a single job with 3 step.
 - The workflow must run every 5 minutes.
 - All the steps must run on ubuntu-latest version.
-- The step must create an issue on GiHhub using git hub commands (similar to git commands).
-    -  The issue created must has got:
-        -  Current date as Title.
-        -  Your name as Body.
+- Steps responsability:
+    -  Step 1: Get current date and create an output of the step with the date.
+    -  Step 2: Checkout repository.
+    -  Step 3: The step must create an issue on GiHhub using git hub commands (similar to git   commands).
+        -  The issue created must has got:
+            -  Current date as Title.
+            -  Your name as Body, feel free to write what you want.
 
 ##### Clues: Find how to extract current datetime on bash. Find how to define an output for one step. The commands to create issues on GitHub is easy to find using Google.
 
 ### 3. Triggered workflow
 - Create new workflow file inside workflows folder.
 - This workflow must be  triggered when an issue is created (opened) on GitHub.
-- The workflow must has got a single job with 1 step.
+- The workflow must has got a single job with 2 step.
 - All the steps must run on ubuntu-latest version.
 - The step must edit the existing issue adding "TechWeek" as Label.
 
