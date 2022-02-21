@@ -8,7 +8,14 @@ jobs:
   create_issue:
     runs-on: ubuntu-latest
     steps:
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+
+      - name: Check out repository code 🛎️
+        uses: actions/checkout@v2
+        
       - env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh issue create -t "$(date +'%Y-%m-%d')" -b "Amin Chouaibi"
+          gh issue create -t ${{ steps.date.outputs.date }} -b "Amin Chouaibi"
