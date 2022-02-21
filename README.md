@@ -58,7 +58,7 @@ With this challenge we'll learn how to run our workflow on specific times.
         -  Current date as Title.
         -  Your name as Body.
 
-##### Clue: The commands to create issues on GitHub is easy to find using Google :)!
+##### Clue: The commands to create issues on GitHub is easy to find using Google, bu
 
 ### 3. Triggered workflow
 - Create new workflow file inside workflows folder.
